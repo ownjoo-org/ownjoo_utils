@@ -4,21 +4,21 @@ from typing import Generator, Optional
 
 from ownjoo_utils.logging.consts import LOG_FORMAT, TIME_FORMAT
 
-if not logging.getLogger().hasHandlers():
-    logging.basicConfig(
-        format=LOG_FORMAT,
-        level=logging.DEBUG,
-        datefmt=TIME_FORMAT,
-    )
-logger = logging.getLogger(__name__)
-
-
 def timed_generator(
         log_progress: bool = True,
         log_progress_label: Optional[str] = None,
         log_progress_interval: int = 10000,
         log_level: int = logging.INFO,
+        logger: Optional[logging.Logger] = None,
 ):
+    if not isinstance(logger, logging.Logger):
+        logging.basicConfig(
+            format=LOG_FORMAT,
+            level=logging.INFO,
+            datefmt=TIME_FORMAT,
+        )
+        logger = logging.getLogger(__name__)
+
     def inner(func):
         def wrapper(*args, **kwargs) -> Generator:
             nonlocal log_progress_label
