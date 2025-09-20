@@ -3,7 +3,7 @@ import logging
 from datetime import datetime, timedelta, timezone
 from typing import Generator, Optional
 
-from src.logging.consts import TIME_FORMAT
+from ownjoo_utils.logging.consts import TIME_FORMAT
 
 if not logging.getLogger().hasHandlers():
     logging.basicConfig(

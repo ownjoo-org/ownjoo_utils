@@ -1,0 +1,1 @@
+from ownjoo_utils.logging.decorators import timed_generator
