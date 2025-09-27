@@ -144,7 +144,6 @@ class TestParsingFunctions(unittest.TestCase):
 
         # teardown
 
-
     def test_should_get_datetime_from_str(self):
         # setup
         expected: str = 'Sun, 06 Nov 1994 08:49:37 GMT'
