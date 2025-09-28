@@ -21,7 +21,7 @@ def timed_generator(
         )
         logger = logging.getLogger(__name__)
 
-    def inner(func):
+    def decorator(func):
         def wrapper(*args, **kwargs) -> Generator:
             nonlocal log_progress_label
             if not log_progress_label:
@@ -42,5 +42,5 @@ def timed_generator(
                 logger.log(log_level, f'Ended {log_progress_label} at {end.isoformat()}')
             logger.log(log_level, f'Yielded {count} {log_progress_label} in {elapsed}')
         return wrapper
-    return inner
+    return decorator
 
