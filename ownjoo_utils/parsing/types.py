@@ -93,7 +93,7 @@ def validate(
     try:
         result = converter(v, exp, **kwargs)
     except Exception as exc_str:
-        logger.exception(f'Failed to parse {v=} with converter {converter}: {exc_str}')
+        logger.debug(f'Failed to parse {v=} with converter {converter}: {exc_str}', exc_info=True)
 
     # check validator
     if not validator:
@@ -102,7 +102,7 @@ def validate(
     try:
         is_valid_result = validator(result, exp, **kwargs)
     except Exception as exc_validation:
-        logger.exception(f'Failed validation: {validator=}: {exc_validation=}')
+        logger.debug(f'Failed validation: {validator=}: {exc_validation=}', exc_info=True)
 
     if is_valid_result:
         return result
