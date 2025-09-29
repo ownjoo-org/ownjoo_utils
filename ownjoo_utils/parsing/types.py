@@ -126,8 +126,12 @@ def get_value(
     :param kwargs: dict: any values to be passed to validate() (and it's converter and validator functions if specified)
     :return: Any: validated value from the nested src
     """
-    keydex: Union[None, float, int, str] = path.pop(0) if path and isinstance(path, list) else None
-    result = src[keydex] if isinstance(src, (dict, list)) and keydex is not None else src
+    result: Any = src
+    try:
+        keydex: Union[None, float, int, str] = path.pop(0) if path and isinstance(path, list) else None
+        result = src[keydex]
+    except (IndexError, KeyError) as exc_val:
+        logger.debug(f'ERROR extracting {path=} from {src=}: {exc_val=}', exc_info=True)
     if path and isinstance(result, (dict, list)):  # keep digging if needed
         return get_value(src=result, path=path, **kwargs)
     elif isinstance(post_processor, Callable):  # call the post-processor if needed
