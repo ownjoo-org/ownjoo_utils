@@ -127,7 +127,7 @@ def get_value(
     :return: Any: validated value from the nested src
     """
     keydex: Union[None, float, int, str] = path.pop(0) if path and isinstance(path, list) else None
-    result = src[keydex] if keydex is not None else src
+    result = src[keydex] if isinstance(src, (dict, list)) and keydex is not None else src
     if path and isinstance(result, (dict, list)):  # keep digging if needed
         return get_value(src=result, path=path, **kwargs)
     elif isinstance(post_processor, Callable):  # call the post-processor if needed
