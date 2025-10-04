@@ -126,7 +126,7 @@ def get_value(
     :param kwargs: dict: any values to be passed to validate() (and it's converter and validator functions if specified)
     :return: Any: validated value from the nested src
     """
-    result: Any = src
+    result: Any = None
     try:
         keydex: Union[None, float, int, str] = path.pop(0) if path and isinstance(path, list) else None
         result = src[keydex]
