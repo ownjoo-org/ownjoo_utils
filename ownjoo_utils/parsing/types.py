@@ -2,14 +2,8 @@ import logging
 from datetime import datetime
 from typing import Any, Callable, Optional, Type, Union, Iterable
 
-from ownjoo_utils.logging.consts import LOG_FORMAT
 from ownjoo_utils.parsing.consts import DEFAULT_SEPARATOR, DEFAULT_VALIDATOR, TimeFormats, DEFAULT_CONVERTER
 
-logging.basicConfig(
-    format=LOG_FORMAT,
-    level=logging.INFO,
-    datefmt=TimeFormats.date_and_time.value,
-)
 logger = logging.getLogger(__name__)
 
 
