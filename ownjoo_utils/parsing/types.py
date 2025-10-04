@@ -124,11 +124,11 @@ def get_value(
     try:
         keydex: Union[None, float, int, str] = path.pop(0) if path and isinstance(path, list) else None
         result = src[keydex]
-    except (IndexError, KeyError) as exc_val:
+    except (IndexError, KeyError, TypeError) as exc_val:
         logger.debug(f'ERROR extracting {path=} from {src=}: {exc_val=}', exc_info=True)
     if path and isinstance(result, (dict, list)):  # keep digging if needed
         return get_value(src=result, path=path, **kwargs)
     elif isinstance(post_processor, Callable):  # call the post-processor if needed
-        return post_processor(result, **kwargs)
+        return post_processor(result or src, **kwargs)
     else:
         return result  # return found value without post-processing
