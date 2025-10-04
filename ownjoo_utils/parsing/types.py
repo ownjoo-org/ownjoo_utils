@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def str_to_list(v: Optional[str] = None, separator: str = DEFAULT_SEPARATOR, **kwargs) -> Optional[list[str]]:
-    if not isinstance(v, str):
+    if not isinstance(v, str) or separator is '':
         return v
     if not isinstance(separator, str):
         separator = DEFAULT_SEPARATOR

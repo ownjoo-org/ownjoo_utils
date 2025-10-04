@@ -50,9 +50,10 @@ class TestParsingFunctions(unittest.TestCase):
     def test_should_get_validated_list_from_str(self):
         # setup
         expected: list = ['a', 'b', 'c']
+        abc: str = ','.join(expected)
 
         # execute
-        actual = validate(v=','.join(expected), exp=list)
+        actual = validate(v=abc, exp=list)
 
         # assess
         self.assertEqual(expected, actual)
