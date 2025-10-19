@@ -32,8 +32,8 @@ def timed_generator(
                 logger.log(log_level, f'Started {log_progress_label} at {start.isoformat()}')
             for each in func(*args, **kwargs):
                 yield each
+                count += 1
                 if log_progress:
-                    count += 1
                     if not count % log_progress_interval:
                         logger.log(log_level, f'Fetched {count} {log_progress_label} so far')
             end = datetime.now(timezone.utc)
@@ -71,8 +71,8 @@ def timed_async_generator(
                 logger.log(log_level, f'Started {log_progress_label} at {start.isoformat()}')
             async for each in func(*args, **kwargs):
                 yield each
+                count += 1
                 if log_progress:
-                    count += 1
                     if not count % log_progress_interval:
                         logger.log(log_level, f'Fetched {count} {log_progress_label} so far')
             end = datetime.now(timezone.utc)
@@ -82,4 +82,3 @@ def timed_async_generator(
             logger.log(log_level, f'Yielded {count} {log_progress_label} in {elapsed}')
         return wrapper
     return decorator
-
