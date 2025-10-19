@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime, timedelta, timezone
-from typing import Generator, Optional, AsyncGenerator
+from functools import wraps
+from typing import AsyncGenerator, Generator, Optional
 
 from ownjoo_utils.logging.consts import LOG_FORMAT
 from ownjoo_utils.parsing.consts import TimeFormats
@@ -22,6 +23,7 @@ def timed_generator(
         logger = logging.getLogger(__name__)
 
     def decorator(func):
+        @wraps(func)
         def wrapper(*args, **kwargs) -> Generator:
             nonlocal log_progress_label
             if not log_progress_label:
@@ -61,6 +63,7 @@ def timed_async_generator(
         logger = logging.getLogger(__name__)
 
     def decorator(func):
+        @wraps(func)
         async def wrapper(*args, **kwargs) -> AsyncGenerator:
             nonlocal log_progress_label
             if not log_progress_label:
